@@ -41,6 +41,8 @@ export default tseslint.config(
               semi: true,
               useTabs: false,
               endOfLine: 'lf',
+              arrowParens: 'always',
+              bracketSpacing: true,
           },
       ],
     },
