@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEnum, IsInt, MinLength } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsInt, MinLength, IsBoolean } from 'class-validator';
 import 'reflect-metadata';
 
 export enum Priority {
@@ -20,46 +20,33 @@ export class CreateTaskDto {
     @MinLength(1)
     title: string;
 
-    @IsOptional()
     @IsString()
     @MinLength(1)
-    description?: string;
+    description: string;
 
     @IsOptional()
-    @IsEnum(Priority)
-    priority?: Priority;
+    @IsInt()
+    priority?: number; // Cambiado a number
 
-    @IsOptional()
-    @IsEnum(Status)
-    status?: Status;
-
-    constructor(
-        title: string,
-        description?: string,
-        priority?: Priority,
-        status?: Status
-    ) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.status = status;
-    }
+    @IsBoolean()
+    status: boolean; 
 }
-export class UpdateTaskDto {
-    title?: string;
-    description?: string;
-    priority?: 'low' | 'medium' | 'high';
-    status?: 'pending' | 'in-progress' | 'completed';
 
-    constructor(
-        title?: string,
-        description?: string,
-        priority?: 'low' | 'medium' | 'high',
-        status?: 'pending' | 'in-progress' | 'completed'
-    ) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.status = status;
-    }
+export class UpdateTaskDto {
+    id: number;
+    @IsOptional()
+    @IsString()
+    title?: string;
+
+    @IsOptional()
+    @IsString()
+    description?: string;
+
+    @IsOptional()
+    @IsInt()
+    priority?: number; // Cambiado a number
+
+    @IsOptional()
+    @IsBoolean()
+    status?: boolean; // Cambiado a boolean
 }

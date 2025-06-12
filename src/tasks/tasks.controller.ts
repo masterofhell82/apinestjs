@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    Put,
+    Query,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
 
@@ -33,10 +43,9 @@ export class TasksController {
     }
 
     @Put('/:id') // Update a task
-    updateTask(@Body() task: UpdateTaskDto) {
-        // Aquí se simula la actualización de una tarea
-        // In a real application, this would update a task in a database or an external service
-        return this.tasksService.updateTask(task);
+    updateTask(@Param('id') id: string, @Body() task: UpdateTaskDto) {
+        // Llama al servicio pasando el id como argumento separado
+        return this.tasksService.updateTask(Number(id), task);
     }
 
     @Patch('/:id') // Partial update of a task
